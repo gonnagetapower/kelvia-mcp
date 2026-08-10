@@ -20,3 +20,6 @@ coverage/
 Thumbs.db
 .idea/
 .vscode/
+
+# MCP Bundle build output
+build/

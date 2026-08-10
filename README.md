@@ -3,6 +3,7 @@
 [![CI](https://github.com/gonnagetapower/kelvia-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/gonnagetapower/kelvia-mcp/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/kelvia-mcp)](https://www.npmjs.com/package/kelvia-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![kelvia-mcp MCP server](https://glama.ai/mcp/servers/gonnagetapower/kelvia-mcp/badges/score.svg)](https://glama.ai/mcp/servers/gonnagetapower/kelvia-mcp)
 
 [Kelvia](https://kelvia.app) is a task manager that AI agents can operate through
 the [Model Context Protocol](https://modelcontextprotocol.io). This server exposes
@@ -207,6 +208,19 @@ pnpm install
 pnpm build
 ```
 
+### MCP Bundle for Claude Desktop
+
+For local installation in Claude Desktop, build the MCP Bundle (`.mcpb`):
+
+```bash
+pnpm run bundle:mcpb
+```
+
+This produces `build/kelvia-mcp-<version>.mcpb`. Open that file in Claude
+Desktop and enter a dedicated Kelvia agent key when prompted. The bundle is a
+packaged form of the same local stdio server; for the hosted OAuth connection,
+use the [recommended quick start](#hosted-quick-start-recommended) instead.
+
 ### Claude Code (stdio)
 
 ```bash
@@ -357,6 +371,14 @@ Reporting a vulnerability: see [SECURITY.md](SECURITY.md). Data handling for the
 hosted endpoint is described in the [AI and MCP data processing
 policy](https://kelvia.app/ai-data-policy), and the
 [privacy policy](https://kelvia.app/privacy) covers Kelvia as a whole.
+
+## Privacy Policy
+
+The MCP Bundle connects to the Kelvia API and sends the requests needed to
+perform the actions you ask it to take. It does not run a separate analytics or
+advertising service. Review the [Kelvia Privacy Policy](https://kelvia.app/privacy)
+and the [AI and MCP Data Processing Policy](https://kelvia.app/ai-data-policy)
+before installing it.
 
 ## Self-hosting the HTTP endpoint
 
