@@ -69,7 +69,7 @@ git -C "$WORK" remote add origin "$REMOTE_URL"
 # ordinary commit rather than a force-push over the previous snapshot.
 if $REWRITE; then
   echo "==> rewriting the public history as a single commit"
-elif git -C "$WORK" fetch --quiet --depth=1 origin "$TARGET_BRANCH" 2>/dev/null; then
+elif git -C "$WORK" fetch --quiet --depth=1 --filter=blob:none origin "$TARGET_BRANCH" 2>/dev/null; then
   git -C "$WORK" reset --quiet --hard FETCH_HEAD
   git -C "$WORK" rm -rq --cached . 2>/dev/null || true
   find "$WORK" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
