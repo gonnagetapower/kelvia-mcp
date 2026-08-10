@@ -1,6 +1,6 @@
 {
   "name": "kelvia-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "mcpName": "io.github.gonnagetapower/kelvia-mcp",
   "description": "MCP server for Kelvia: boards, tasks, worklogs, stages, roles, and day planning for AI agents",
   "license": "MIT",
