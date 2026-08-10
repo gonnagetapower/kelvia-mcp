@@ -354,8 +354,9 @@ approving it, use a dedicated agent key for automation, and grant only the
 boards and scopes the workflow needs.
 
 Reporting a vulnerability: see [SECURITY.md](SECURITY.md). Data handling for the
-hosted endpoint is described in the Kelvia Trust Center at
-[kelvia.app/trust](https://kelvia.app/trust).
+hosted endpoint is described in the [AI and MCP data processing
+policy](https://kelvia.app/ai-data-policy), and the
+[privacy policy](https://kelvia.app/privacy) covers Kelvia as a whole.
 
 ## Self-hosting the HTTP endpoint
 
