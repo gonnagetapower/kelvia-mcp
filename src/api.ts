@@ -1,7 +1,13 @@
 import axios, { type AxiosInstance } from "axios";
 
+/**
+ * Kelvia API this server talks to. The default is production, because the
+ * common case is an installed package: a user who forgets the variable should
+ * reach Kelvia, not a port on their own machine that answers nothing. Local
+ * development points it at the dev API explicitly — see the `dev` script.
+ */
 export const API_URL =
-  (process.env.KELVIA_API_URL ?? "http://localhost:4000/api").replace(/\/$/, "");
+  (process.env.KELVIA_API_URL ?? "https://api.kelvia.app/api").replace(/\/$/, "");
 
 /**
  * Origin of the OAuth 2.1 Authorization Server. It lives at the backend

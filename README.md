@@ -9,8 +9,9 @@ the [Model Context Protocol](https://modelcontextprotocol.io). This server expos
 **58 tools** for boards, tasks, comments, worklogs, stages, members, invitations,
 tags, and a personal day planner.
 
-Use the hosted server with OAuth for the fastest setup, or run the server locally
-over stdio with a Kelvia agent key. You need a Kelvia account first — sign up at
+Connect to the hosted endpoint with OAuth — one command, no token to paste.
+A [local stdio mode](#local-stdio-setup) exists for clients that cannot do
+remote MCP, and for CI. You need a Kelvia account first — sign up at
 [kelvia.app](https://kelvia.app).
 
 ![A Kelvia board whose tasks were created through this MCP server](https://raw.githubusercontent.com/gonnagetapower/kelvia-mcp/main/docs/assets/board.png)
@@ -27,8 +28,8 @@ over stdio with a Kelvia agent key. You need a Kelvia account first — sign up 
   part of the product instead of all 58 tools.
 - **Modern remote auth** — Streamable HTTP with OAuth 2.1 + PKCE, or a Bearer
   token when an explicit agent identity is required.
-- **Local option** — stdio works with Claude Code, Codex, Cursor, and other MCP
-  clients.
+- **A local option when you need one** — [stdio](#local-stdio-setup) for clients
+  without remote MCP support, for CI, and for keeping the key on one machine.
 
 ## See it work
 
@@ -171,6 +172,23 @@ only through the `Authorization` header.
 
 ## Local stdio setup
 
+**Most people should use the hosted endpoint above.** Running the server
+locally does not keep your tasks on your machine — they live in Kelvia either
+way, and the local process talks to the same API. What it changes is the path
+your credential takes, and which clients can connect.
+
+Use stdio when one of these applies:
+
+- **Your client cannot do remote MCP or OAuth.** The major clients can, but
+  older versions, some IDE plugins, and locked-down machines where a browser
+  redirect will not open, cannot.
+- **You are automating in CI**, where nobody is around to approve an OAuth
+  prompt. (An agent key against the hosted endpoint also works — this just
+  removes a dependency.)
+- **Your key should not leave the machine.** With the hosted endpoint your
+  token reaches `mcp.kelvia.app` and stays in its memory for the session; over
+  stdio it only ever goes to the Kelvia API.
+
 Requirements: Node.js 20+.
 
 Run the published package without installing anything:
@@ -194,7 +212,6 @@ pnpm build
 ```bash
 claude mcp add --scope user \
   --env KELVIA_API_TOKEN=klv_your_agent_key \
-  --env KELVIA_API_URL=https://api.kelvia.app/api \
   --transport stdio kelvia -- node /absolute/path/to/kelvia-mcp/dist/index.js
 ```
 
@@ -203,7 +220,6 @@ claude mcp add --scope user \
 ```bash
 codex mcp add kelvia \
   --env KELVIA_API_TOKEN=klv_your_agent_key \
-  --env KELVIA_API_URL=https://api.kelvia.app/api \
   -- node /absolute/path/to/kelvia-mcp/dist/index.js
 ```
 
@@ -216,8 +232,7 @@ codex mcp add kelvia \
       "command": "node",
       "args": ["/absolute/path/to/kelvia-mcp/dist/index.js"],
       "env": {
-        "KELVIA_API_TOKEN": "klv_your_agent_key",
-        "KELVIA_API_URL": "https://api.kelvia.app/api"
+        "KELVIA_API_TOKEN": "klv_your_agent_key"
       }
     }
   }
@@ -361,7 +376,7 @@ Then check `GET /health`, which reports the available transports and toolsets.
 | Variable | Mode | Purpose |
 | --- | --- | --- |
 | `KELVIA_API_TOKEN` | stdio | Agent key or personal token |
-| `KELVIA_API_URL` | both | API base; defaults to `http://localhost:4000/api` |
+| `KELVIA_API_URL` | both | API base; defaults to `https://api.kelvia.app/api` |
 | `KELVIA_TOOLSETS` | both | Comma-separated toolsets; default all |
 | `PORT` | hosted | Enables HTTP mode and selects the listening port |
 | `MCP_PUBLIC_URL` | hosted | Public protected-resource origin |

@@ -4,6 +4,16 @@ All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] — 2026-08-10
+
+### Fixed
+
+- `KELVIA_API_URL` now defaults to `https://api.kelvia.app/api` instead of
+  `http://localhost:4000/api`. The old default came from developing inside the
+  Kelvia monorepo: anyone installing the package and forgetting the variable got
+  a server that silently talked to a port on their own machine and failed on
+  every tool call. It also disagreed with what `server.json` advertised.
+
 ## [1.0.0] — 2026-08-10
 
 First public release.
