@@ -1,0 +1,73 @@
+{
+  "name": "kelvia-mcp",
+  "version": "1.0.0",
+  "mcpName": "io.github.gonnagetapower/kelvia-mcp",
+  "description": "MCP server for Kelvia: boards, tasks, worklogs, stages, roles, and day planning for AI agents",
+  "license": "MIT",
+  "homepage": "https://kelvia.app/mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonnagetapower/kelvia-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gonnagetapower/kelvia-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "task-management",
+    "kanban",
+    "ai-agents",
+    "claude",
+    "codex",
+    "cursor"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "server.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "bin": {
+    "kelvia-mcp": "dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --config eslint.config.mjs",
+    "typecheck:strict": "tsc --noEmit",
+    "test": "pnpm run build && node --test test/*.test.mjs",
+    "prepack": "pnpm run build",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "axios": "^1.19.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.3.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.25.0",
+    "globals": "^16.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
+  }
+}

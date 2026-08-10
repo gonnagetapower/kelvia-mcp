@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        # The lower bound is the version declared in engines.node.
+        node-version: [20, 22]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # No `cache: pnpm` here: this package is developed inside the Kelvia
+      # monorepo and mirrored out, so the lockfile lives with the monorepo and
+      # setup-node's pnpm cache has nothing to key on.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm run lint
+
+      - run: pnpm run typecheck:strict
+
+      - run: pnpm run test
+
+      - name: Verify the published package contents
+        run: pnpm pack --dry-run

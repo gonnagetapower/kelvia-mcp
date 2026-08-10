@@ -1,0 +1,22 @@
+# Node
+node_modules/
+*.log
+*.tsbuildinfo
+
+# Build artifacts
+dist/
+coverage/
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Local MCP config (may contain API keys)
+.mcp.json
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

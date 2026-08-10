@@ -1,0 +1,69 @@
+name: Publish to npm and the MCP Registry
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch: {}
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      # Required both for MCP Registry OIDC auth and for npm provenance.
+      id-token: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # No `cache: pnpm`: the lockfile lives in the Kelvia monorepo, and
+      # setup-node fails outright when its cache key is missing.
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --no-frozen-lockfile
+
+      - run: pnpm run lint
+
+      - run: pnpm run test
+
+      # server.json, package.json and the git tag must agree, otherwise the
+      # registry publishes metadata pointing at a package version that does not
+      # exist on npm.
+      - name: Check version consistency
+        run: |
+          TAG="${GITHUB_REF#refs/tags/v}"
+          PKG=$(node -p "require('./package.json').version")
+          SRV=$(node -p "require('./server.json').version")
+          SRV_PKG=$(node -p "require('./server.json').packages[0].version")
+          MCP_NAME=$(node -p "require('./package.json').mcpName")
+          SRV_NAME=$(node -p "require('./server.json').name")
+          echo "tag=$TAG package.json=$PKG server.json=$SRV/$SRV_PKG"
+          if [ "${GITHUB_REF#refs/tags/}" != "$GITHUB_REF" ] && [ "$TAG" != "$PKG" ]; then
+            echo "::error::git tag v$TAG does not match package.json version $PKG"; exit 1
+          fi
+          [ "$PKG" = "$SRV" ] || { echo "::error::server.json version $SRV != package.json $PKG"; exit 1; }
+          [ "$PKG" = "$SRV_PKG" ] || { echo "::error::server.json packages[0].version $SRV_PKG != $PKG"; exit 1; }
+          [ "$MCP_NAME" = "$SRV_NAME" ] || { echo "::error::mcpName $MCP_NAME != server.json name $SRV_NAME"; exit 1; }
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate to the MCP Registry
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish to the MCP Registry
+        run: ./mcp-publisher publish

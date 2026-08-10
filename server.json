@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.gonnagetapower/kelvia-mcp",
+  "title": "Kelvia",
+  "description": "Task manager your agent can fully operate: boards, tasks, sprints, roles, worklogs, day planner.",
+  "repository": {
+    "url": "https://github.com/gonnagetapower/kelvia-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://kelvia.app/mcp",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "kelvia-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "KELVIA_API_TOKEN",
+          "description": "Kelvia agent key (create one in Kelvia → Profile → Agents)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "KELVIA_API_URL",
+          "description": "Kelvia API base URL",
+          "isRequired": false,
+          "default": "https://api.kelvia.app/api",
+          "format": "string"
+        },
+        {
+          "name": "KELVIA_TOOLSETS",
+          "description": "Comma-separated toolsets to enable: boards, tasks, comments, stages, members, planner, tags. Defaults to all.",
+          "isRequired": false,
+          "format": "string"
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.kelvia.app/mcp"
+    }
+  ]
+}
