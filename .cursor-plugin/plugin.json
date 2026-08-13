@@ -1,0 +1,28 @@
+{
+  "name": "kelvia",
+  "displayName": "Kelvia",
+  "version": "1.0.0",
+  "description": "A shared task manager that Claude Code, Codex, Cursor, and other AI agents can update through MCP.",
+  "author": {
+    "name": "Kelvia"
+  },
+  "homepage": "https://kelvia.app/mcp",
+  "repository": "https://github.com/gonnagetapower/kelvia-mcp",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "task-management",
+    "kanban",
+    "ai-agents",
+    "coding-agents",
+    "productivity"
+  ],
+  "category": "productivity",
+  "tags": [
+    "mcp",
+    "task-management",
+    "kanban",
+    "ai-agents"
+  ],
+  "logo": "icon.png"
+}
