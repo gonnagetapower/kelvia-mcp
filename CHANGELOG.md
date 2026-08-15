@@ -4,6 +4,17 @@ All notable changes to this package are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- A Claude Code plugin under `plugin/`, and a marketplace manifest at the
+  repository root that serves it. The plugin wires the hosted endpoint over
+  OAuth, so installing it needs no token and no configuration, and bundles a
+  `kelvia-board` skill plus the `/kelvia:setup`, `/kelvia:capture`,
+  `/kelvia:standup`, and `/kelvia:plan-day` commands. Install it directly with
+  `/plugin marketplace add gonnagetapower/kelvia-mcp`.
+
 ## [1.0.2] — 2026-08-10
 
 ### Added

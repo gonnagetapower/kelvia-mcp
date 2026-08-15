@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "kelvia",
+  "description": "Give Claude a task board it can actually run. Kelvia is a free Kanban board shared by you and your agents: Claude files, triages and moves tasks, logs the time it spent, comments its reasoning, and blocks out your day — and every change is attributed to the agent that made it, so you can review or revert it. Connects over OAuth in one click; no token to paste.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Kelvia",
+    "url": "https://kelvia.app"
+  },
+  "homepage": "https://kelvia.app/mcp",
+  "repository": "https://github.com/gonnagetapower/kelvia-mcp",
+  "license": "MIT",
+  "keywords": [
+    "task-management",
+    "kanban",
+    "project-management",
+    "issue-tracking",
+    "time-tracking",
+    "day-planner",
+    "mcp"
+  ]
+}

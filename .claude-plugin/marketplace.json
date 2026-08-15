@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "kelvia",
+  "description": "The Kelvia plugin for Claude Code: a task board your agent runs, and you can audit",
+  "owner": {
+    "name": "Kelvia",
+    "email": "hello@kelvia.app",
+    "url": "https://kelvia.app"
+  },
+  "plugins": [
+    {
+      "name": "kelvia",
+      "description": "Give Claude a task board it can actually run. Kelvia is a free Kanban board shared by you and your agents: Claude files, triages and moves tasks, logs the time it spent, comments its reasoning, and blocks out your day — and every change is attributed to the agent that made it, so you can review or revert it. Connects over OAuth in one click; no token to paste.",
+      "author": { "name": "Kelvia", "url": "https://kelvia.app" },
+      "category": "productivity",
+      "source": "./plugin",
+      "homepage": "https://kelvia.app/mcp"
+    }
+  ]
+}

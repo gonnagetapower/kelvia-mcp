@@ -46,8 +46,18 @@ fi
 
 # The public tree must never carry credentials. Fail loudly rather than
 # discovering a leaked token after the repository is public.
-if git ls-files "$PREFIX" | grep -Eq '(^|/)\.env($|\.)|\.mcp\.json$'; then
+#
+# One .mcp.json is exempt: the plugin's, which exists to be published and holds
+# only the public endpoint URL. It is exempt by exact path, so any other
+# .mcp.json still trips the guard, and it is checked for an inline credential
+# below rather than simply trusted.
+SAFE_MCP_CONFIG="$PREFIX/plugin/.mcp.json"
+if git ls-files "$PREFIX" | grep -vFx "$SAFE_MCP_CONFIG" | grep -Eq '(^|/)\.env($|\.)|\.mcp\.json$'; then
   echo "error: $PREFIX tracks an env or local MCP config file" >&2
+  exit 1
+fi
+if [[ -f "$SAFE_MCP_CONFIG" ]] && grep -qiE '"(authorization|api[_-]?key|token|secret)"' "$SAFE_MCP_CONFIG"; then
+  echo "error: $SAFE_MCP_CONFIG carries a credential field — it is published as-is" >&2
   exit 1
 fi
 if git grep -nIE '(klv|zmt)_[A-Za-z0-9_-]{16,}' -- "$PREFIX" >/dev/null 2>&1; then
