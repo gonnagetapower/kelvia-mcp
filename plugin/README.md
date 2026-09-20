@@ -19,7 +19,7 @@ Kelvia is free. No paid plan, no card.
 
 The first tool call opens a browser window to authorize the connection. There is
 no token to paste and nothing to configure. You need a free Kelvia account —
-sign up at [kelvia.app](https://kelvia.app).
+[Try for free](https://kelvia.app/try?source=claude_plugin).
 
 Then run `/kelvia:setup` to pick a board.
 
@@ -66,8 +66,8 @@ on each board — an agent cannot exceed the permissions you gave it.
 
 ## Links
 
-- Product — [kelvia.app](https://kelvia.app)
-- MCP server and full tool reference — [kelvia.app/mcp](https://kelvia.app/mcp)
+- Product — [kelvia.app](https://kelvia.app/?source=claude_plugin)
+- MCP server and full tool reference — [kelvia.app/mcp](https://kelvia.app/mcp?source=claude_plugin_docs)
 - Source — [github.com/gonnagetapower/kelvia-mcp](https://github.com/gonnagetapower/kelvia-mcp)
 - Privacy policy — [kelvia.app/privacy](https://kelvia.app/privacy)
 - Support — hello@kelvia.app

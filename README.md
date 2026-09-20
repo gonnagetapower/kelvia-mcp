@@ -1,19 +1,37 @@
-# Kelvia MCP server
+# Kelvia MCP — task manager for coding agents
 
 [![CI](https://github.com/gonnagetapower/kelvia-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/gonnagetapower/kelvia-mcp/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/kelvia-mcp)](https://www.npmjs.com/package/kelvia-mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![MCP Registry](https://img.shields.io/badge/MCP%20Registry-listed-5b5bd6)](https://registry.modelcontextprotocol.io/?q=kelvia)
 [![kelvia-mcp MCP server](https://glama.ai/mcp/servers/gonnagetapower/kelvia-mcp/badges/score.svg)](https://glama.ai/mcp/servers/gonnagetapower/kelvia-mcp)
 
-[Kelvia](https://kelvia.app) is a task manager that AI agents can operate through
-the [Model Context Protocol](https://modelcontextprotocol.io). This server exposes
-**58 tools** for boards, tasks, comments, worklogs, stages, members, invitations,
-tags, and a personal day planner.
+[Kelvia](https://kelvia.app/?source=github_mcp) is a shared task manager for
+people and coding agents. Through the
+[Model Context Protocol](https://modelcontextprotocol.io), an agent can create
+and update tasks, move work across a Kanban board, comment, log time, run stages,
+and plan the day. Its changes stay visible and attributed in the same UI the
+human uses.
 
-Connect to the hosted endpoint with OAuth — one command, no token to paste.
-A [local stdio mode](#local-stdio-setup) exists for clients that cannot do
-remote MCP, and for CI. You need a Kelvia account first — sign up at
-[kelvia.app](https://kelvia.app).
+The server exposes **58 tools** and works with Claude Code, Codex, Cursor, and
+other MCP clients. The hosted endpoint uses OAuth, so there is no API token to
+paste into the recommended setup. A [local stdio mode](#local-stdio-setup) is
+available for CI and clients without remote MCP support.
+
+**[Try for free](https://kelvia.app/try?source=github_mcp)** ·
+[MCP documentation](https://kelvia.app/mcp?source=github_mcp_docs) ·
+[Hosted endpoint](https://mcp.kelvia.app/mcp)
+
+## Connect in one command
+
+| Client | Command |
+|---|---|
+| Claude Code | `claude mcp add --transport http --scope user kelvia https://mcp.kelvia.app/mcp` |
+| Codex | `codex mcp add kelvia --url https://mcp.kelvia.app/mcp` |
+| Cursor | Add `https://mcp.kelvia.app/mcp` in **Settings → Tools & MCP** |
+
+The first connection opens Kelvia in the browser for OAuth approval. After it
+connects, ask the client: `List my Kelvia boards.`
 
 ![A Kelvia board whose tasks were created through this MCP server](https://raw.githubusercontent.com/gonnagetapower/kelvia-mcp/main/docs/assets/board.png)
 

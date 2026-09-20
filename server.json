@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.gonnagetapower/kelvia-mcp",
   "title": "Kelvia",
-  "description": "Task manager your agent can fully operate: boards, tasks, sprints, roles, worklogs, day planner.",
+  "description": "Shared task manager for coding agents and humans: Kanban boards, tasks, worklogs, stages, roles, and day planning over MCP.",
   "repository": {
     "url": "https://github.com/gonnagetapower/kelvia-mcp",
     "source": "github"

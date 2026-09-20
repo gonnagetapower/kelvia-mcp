@@ -2,7 +2,7 @@
   "name": "kelvia-mcp",
   "version": "1.0.2",
   "mcpName": "io.github.gonnagetapower/kelvia-mcp",
-  "description": "MCP server for Kelvia: boards, tasks, worklogs, stages, roles, and day planning for AI agents",
+  "description": "Shared task manager for coding agents and humans: Kanban boards, tasks, worklogs, stages, roles, and day planning over MCP",
   "license": "MIT",
   "homepage": "https://kelvia.app/mcp",
   "repository": {
